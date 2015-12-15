@@ -15,3 +15,8 @@ vignettes/*.pdf
 
 *~
 *.RData
+*historygit.txt
+*.aux
+*.log
+*.tex
+*.gz
