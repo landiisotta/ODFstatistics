@@ -1,59 +1,43 @@
+library('reader')
+
 ################################################################################
 ################################################################################
-##write the path to your dataset and the name of your dataset file .xlsx
-path <- '~/Desktop/'
-dataset.name <- 'sheet.xlsx'
+#########################MODIFY THE VARIABLES###################################
+################################################################################
+##write the path to your dataset ('path' variable)
+##and the name of your dataset file .xlsx/.xls/.csv ('dataset.name' variable)
+path <- 'path_name'
+dataset.name <- 'file_name'
 
 ##write the type of the data file long, wide, sheet as 'l','w','sh'
-typedf <- 'sh' 
+typedf <- 'l'  
 
 ##number of factors (except subject and time)
-nfact <- 1
+nfact <- NULL
 
 ##number of sheets (if any)
-nsheet <- 2
+nsheet <- NULL
 
-##if 'l' or 'w' columns should have subject,time,factors,time-factors
+##if 'l' columns should have subject,time,factors,time-factors
+##if 'w' columns should have subject, factors, time-factors
+##if 'sh' columns should have subject, time, factors, time-factors
 
 ################################################################################
 #########################DO NOT MODIFY FROM HERE ON!!!##########################
 ################################################################################
-library('openxlsx')
-library('reshape2')
+##get the extension of your file
+ext <- get.ext(dataset.name)
 
-data.path <- file.path(path)
+source('readtables.R')
 
-if(typedf=='sh'){
-  dataframe <- data.frame()
-  time <- vector(mode='numeric')
-  for(i in 1:nsheet){
-    assign(paste('dataframe',i,sep=''),
-           read.xlsx(file.path(data.path,dataset.name),
-                                                      colNames=TRUE, sheet=i))
-    dataframe <- rbind(dataframe,get(paste('dataframe',i,sep='')))
-  }
-  typedf <- 'l'
-} else {
-  dataframe <- read.xlsx(file.path(data.path,dataset.name), colNames=TRUE)
-}
-if (typedf=='w'){
-  dataframe.wide <- dataframe
-  idx <- grep('[.][1-9]', names(dataframe.wide))
-  dataframe.long <- reshape(dataframe.wide,
-                            varying=names(dataframe.wide)[idx],
-                            direction='long',
-                            idvar=names(dataframe.wide)[1])
-} else { if(typedf=='l'){
-  dataframe.long <- dataframe
-  dataframe.wide <- reshape(dataframe.long,
-                            v.names=names(dataframe.long)[-c(1:(nfact+2))],
-                            timevar=names(dataframe.long)[2],
-                            idvar=names(dataframe.long)[1],
-                            direction='wide')
-}
-       }
-
-
+if (ext=='xlsx' | ext=='xls'){
+  database <- readdb.xlsx(path, dataset.name, typedf, nfact, nsheet)
+  database.long <- database[[1]]
+  database.wide <- database[[2]]
+} else{ database <- readdb.csv(path, dataset.name, typedf, nfact, nsheet)
+        database.long <- database[[1]]
+        database.wide <- database[[2]]
+      }
 
 
 
