@@ -28,7 +28,9 @@ path -> insert the path to your working directory between quotes
 
 dataset.name -> insert the name of the file to read between quotes
 
-typedf -> insert the type of your dataset as explained in 'db_structure.pdf' ('l' for long format, 'w' for wide format, 'sh' for sheet format, 'nolong' for not-longitudinal format)
+typedf -> insert the type of your dataset as explained in 'db_structure.pdf' 
+('l' for long format, 'w' for wide format, 'sh' for sheet format, 
+'nolong' for not-longitudinal format)
 
 
 nfact -> insert the number of variables that are NOT time dependent. Do not include the column of subject ids and the column of times (if any)
