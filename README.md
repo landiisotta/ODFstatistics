@@ -28,7 +28,8 @@ path -> insert the path to your working directory between quotes
 
 dataset.name -> insert the name of the file to read between quotes
 
-typedf -> insert the type of your dataset as explained in 'db_structure.pdf'
+typedf -> insert the type of your dataset as explained in 'db_structure.pdf' ('l' for long format, 'w' for wide format, 'sh' for sheet format, 'nolong' for not-longitudinal format)
+
 
 nfact -> insert the number of variables that are NOT time dependent. Do not include the column of subject ids and the column of times (if any)
 
@@ -37,10 +38,15 @@ nsheet -> insert the number of sheets for the sheet format dataset. Otherwise le
 
 **Run the code with RStudio** 
 
-**The databases are stored in the variables:**
+**If the study is longitudinal, the databases are stored in the variables:**
 ```
 database.long -> long format dataframe
 database.wide -> wide format dataframe 
+```
+
+**If the study is not longitudinal, the database is stored in the variable:**
+```
+database
 ```
 
 **NB all the required packages can be downloaded directly with RStudio or with**

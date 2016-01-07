@@ -1,7 +1,8 @@
 library('reshape2')
 
 ##read file .xlsx and .xls
-readdb.xlsx <- function(path, dataset.name, typedf, nfact=NULL, nsheet=NULL){
+readdb.xlsx <- function(path, dataset.name, typedf, nfact=NULL,
+                        nsheet=NULL, nc=NULL){
   library('gdata')
   
   data.path <- file.path(path)
@@ -33,7 +34,7 @@ readdb.xlsx <- function(path, dataset.name, typedf, nfact=NULL, nsheet=NULL){
                               timevar=names(dataframe.long)[2],
                               idvar=names(dataframe.long)[1],
                               direction='wide')
-  }
+  } else { return(dataframe)}
          }
   return(list(dataframe.long,dataframe.wide))
 }
@@ -75,7 +76,9 @@ readdb.csv <- function(path, dataset.name, typedf, nfact=NULL, nsheet=NULL){
                               timevar=names(dataframe.long)[2],
                               idvar=names(dataframe.long)[1],
                               direction='wide')
-  }
+  } else {return(dataframe)}
          }
 return(list(dataframe.long,dataframe.wide))
 }
+
+
