@@ -32,7 +32,6 @@ typedf -> insert the type of your dataset as explained in 'db_structure.pdf'
 ('l' for long format, 'w' for wide format, 'sh' for sheet format, 
 'nolong' for not-longitudinal format)
 
-
 nfact -> insert the number of variables that are NOT time dependent. Do not include the column of subject ids and the column of times (if any)
 
 nsheet -> insert the number of sheets for the sheet format dataset. Otherwise leave the variable initialized as NULL
