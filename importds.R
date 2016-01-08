@@ -9,8 +9,8 @@ library('reader')
 path <- 'path_name'
 dataset.name <- 'file_name'
 
-##write the type of the data file long, wide, sheet, not longitudinal as
-##'l','w','sh','nolong'
+##write the type of the data file long, wide, sheet, cross-sectional as
+##'l','w','sh','cs'
 typedf <- 'insert_type'  
 
 ##number of factors (except subject and time for longitudinal datasets only)
@@ -22,7 +22,7 @@ nsheet <- NULL
 ##if 'l' columns should have subject,time,factors,time-factors
 ##if 'w' columns should have subject, factors, time-factors
 ##if 'sh' columns should have subject, time, factors, time-factors
-##if 'nolong' columns should be subject, factors
+##if 'cs' columns should be subject, factors
 
 ################################################################################
 #########################DO NOT MODIFY FROM HERE ON!!!##########################
@@ -34,13 +34,13 @@ source('readtables.R')
 
 if (ext=='xlsx' | ext=='xls'){
   database <- readdb.xlsx(path, dataset.name, typedf, nfact, nsheet, nc)
-  if(typedf!='nolong'){
+  if(typedf!='cs'){
   database.long <- database[[1]]
   database.wide <- database[[2]]}
 }
 if(ext=='csv'){
   database <- readdb.csv(path, dataset.name, typedf, nfact, nsheet, nc)
-  if(typedf!='nolong'){
+  if(typedf!='cs'){
     database.long <- database[[1]]
     database.wide <- database[[2]]}
 }
