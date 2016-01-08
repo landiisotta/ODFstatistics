@@ -33,19 +33,23 @@ ext <- get.ext(dataset.name)
 source('readtables.R')
 
 if (ext=='xlsx' | ext=='xls'){
-  database <- readdb.xlsx(path, dataset.name, typedf, nfact, nsheet, nc)
+  database <- readdb.xlsx(path, dataset.name, typedf, nfact, nsheet)
   if(typedf!='cs'){
   database.long <- database[[1]]
   database.wide <- database[[2]]}
 }
 if(ext=='csv'){
-  database <- readdb.csv(path, dataset.name, typedf, nfact, nsheet, nc)
+  database <- readdb.csv(path, dataset.name, typedf, nfact, nsheet)
   if(typedf!='cs'){
     database.long <- database[[1]]
     database.wide <- database[[2]]}
 }
 
 
+if(typedf!='cs'){
+  save(file=file.path(path,'database.long.RData'),database.long)
+  save(file=file.path(path,'database.wide.RData'),database.wide)
+} else { save(file=file.path(path,'database.RData'),database)}
 
 
 
