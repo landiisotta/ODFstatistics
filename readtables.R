@@ -2,7 +2,7 @@ library('reshape2')
 
 ##read file .xlsx and .xls
 readdb.xlsx <- function(path, dataset.name, typedf, nfact=NULL,
-                        nsheet=NULL, nc=NULL){
+                        nsheet=NULL){
   library('gdata')
   
   data.path <- file.path(path)
@@ -29,11 +29,17 @@ readdb.xlsx <- function(path, dataset.name, typedf, nfact=NULL,
                               idvar=names(dataframe.wide)[1])
   } else { if(typedf=='l'){
     dataframe.long <- dataframe
+    if(!is.null(nfact)){
     dataframe.wide <- reshape(dataframe.long,
                               v.names=names(dataframe.long)[-c(1:(nfact+2))],
                               timevar=names(dataframe.long)[2],
                               idvar=names(dataframe.long)[1],
                               direction='wide')
+  } else { dataframe.wide <- reshape(dataframe.long,
+                              v.names=names(dataframe.long)[-c(1:2)],
+                              timevar=names(dataframe.long)[2],
+                              idvar=names(dataframe.long)[1],
+                              direction='wide')}
   } else { return(dataframe)}
          }
   return(list(dataframe.long,dataframe.wide))
@@ -71,11 +77,17 @@ readdb.csv <- function(path, dataset.name, typedf, nfact=NULL, nsheet=NULL){
                               idvar=names(dataframe.wide)[1])
   } else { if(typedf=='l'){
     dataframe.long <- dataframe
+    if(!is.null(nfact)){
     dataframe.wide <- reshape(dataframe.long,
                               v.names=names(dataframe.long)[-c(1:(nfact+2))],
                               timevar=names(dataframe.long)[2],
                               idvar=names(dataframe.long)[1],
                               direction='wide')
+  } else { dataframe.wide <- reshape(dataframe.long,
+                              v.names=names(dataframe.long)[-c(1:2)],
+                              timevar=names(dataframe.long)[2],
+                              idvar=names(dataframe.long)[1],
+                              direction='wide')}
   } else {return(dataframe)}
          }
 return(list(dataframe.long,dataframe.wide))
